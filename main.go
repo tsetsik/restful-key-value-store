@@ -211,8 +211,8 @@ func (m *myHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 func logErrors(ch chan string) {
 	fErr, _ := os.OpenFile("error.log", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600)
-	for {
-		fErr.WriteString(<-ch)
+	for msg := range ch {
+		fErr.WriteString(msg)
 	}
 }
 
